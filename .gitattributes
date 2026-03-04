@@ -1,2 +1,33 @@
-# Auto detect text files and perform LF normalization
+
+# Normalize line endings automatically
 * text=auto
+
+# Force LF for source code and configs
+*.py text eol=lf
+*.sh text eol=lf
+*.cpp text eol=lf
+*.hpp text eol=lf
+*.c text eol=lf
+*.h text eol=lf
+*.md text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.xml text eol=lf
+*.launch text eol=lf
+
+# ROS / robot description files
+*.urdf text
+*.xacro text
+*.world text
+
+# Binary assets (no diff)
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.mp4 binary
+*.bag binary
+*.db3 binary
+
+# Jupyter notebooks
+*.ipynb text
