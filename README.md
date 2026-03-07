@@ -1,12 +1,12 @@
 # 🚀 **NeuroNav-ROS2** ⚙️
-### **(59-Day Mastery Plan)**
+### **(55-Day Mastery Plan)**
 
-**NeuroNav-ROS2** is a 59-day deep dive into **robot perception and
+**NeuroNav-ROS2** is a 55-day deep dive into **robot perception and
 autonomy using ROS2**. The goal of this challenge is to build a **complete perception-to-navigation pipeline** while maintaining a **professional ROS2 repository structure** rather than a tutorial-style project.
 
 ------------------------------------------------------------------------
 
-The challenge begins on **March 3** and ends on **April 30**.
+The challenge begins on **March 7** and ends on **April 30**.
 
 ------------------------------------------------------------------------
 
@@ -189,9 +189,9 @@ Key topics:
 
 # Challenge Timeline
 
-- **First Date:** March 3.
+- **First Date:** March 7.
 - **Final Date:** April 30.
-- **Duration:** 59 Days.
+- **Duration:** 55 Days.
 
 ------------------------------------------------------------------------
 
@@ -200,20 +200,17 @@ Key topics:
 ```
   Day   Date     Task
   ----- -------- -------------------------------------------------
-  1     Mar 3    Install ROS2, Gazebo, RViz2 and validate setup
-  2     Mar 4    Initialize workspace and create bringup package
-  3     Mar 5    Camera publisher node
-  4     Mar 6    Image subscriber pipeline
-  5     Mar 7    OpenCV integration node
-  6     Mar 8    Canny edge detection
-  7     Mar 9    Hough line detection
-  8     Mar 10   ORB feature extraction
-  9     Mar 11   Feature matching
-  10    Mar 12   TF2 fundamentals
-  11    Mar 13   Camera model concepts
-  12    Mar 14   Camera calibration
-  13    Mar 15   Distortion correction
-  14    Mar 16   Depth image processing
+  1     Mar 7    ROS2 + Gazebo + RViz2 validation, workspace setup and bringup package
+  2     Mar 8    Camera publisher node + image subscriber pipeline
+  3     Mar 9    OpenCV integration node + Canny edge detection
+  4     Mar 10   Hough line detection + ORB feature extraction
+  5     Mar 11   Feature matching
+  6     Mar 12   TF2 fundamentals
+  7     Mar 13   Camera model concepts
+  8     Mar 14   Camera calibration
+  9     Mar 15   Distortion correction
+ 10     Mar 16   Depth image processing
+ 11     Mar 17   RGB-depth synchronization
 ```
 
 ------------------------------------------------------------------------
@@ -223,22 +220,21 @@ Key topics:
 ```
   Day   Date     Task
   ----- -------- -------------------------------
-  15    Mar 17   RGB-depth synchronization
-  16    Mar 18   Basic object tracking
-  17    Mar 19   Centroid tracker
-  18    Mar 20   Kalman filter tracking
-  19    Mar 21   Extended Kalman filter
-  20    Mar 22   IMU data simulation
-  21    Mar 23   IMU + vision fusion
-  22    Mar 24   Time synchronization concepts
-  23    Mar 25   Multi-object tracking
-  24    Mar 26   rosbag2 recording
-  25    Mar 27   Benchmark metrics
-  26    Mar 28   Visual odometry basics
-  27    Mar 29   Pose chaining
-  28    Mar 30   Drift analysis
-  29    Mar 31   Pose graph concepts
-  30    Apr 1    Estimation pipeline demo
+  12    Mar 18   Basic object tracking
+  13    Mar 19   Centroid tracker
+  14    Mar 20   Kalman filter tracking
+  15    Mar 21   Extended Kalman filter
+  16    Mar 22   IMU data simulation
+  17    Mar 23   IMU + vision fusion
+  18    Mar 24   Time synchronization concepts
+  19    Mar 25   Multi-object tracking
+  20    Mar 26   rosbag2 recording
+  21    Mar 27   Benchmark metrics
+  22    Mar 28   Visual odometry basics
+  23    Mar 29   Pose chaining
+  24    Mar 30   Drift analysis
+  25    Mar 31   Pose graph concepts
+  26    Apr 1    Estimation pipeline demo
 ```
 
 ------------------------------------------------------------------------
@@ -248,21 +244,21 @@ Key topics:
 ```
   Day   Date     Task
   ----- -------- ----------------------------
-  31    Apr 2    Occupancy grid basics
-  32    Apr 3    Map update pipeline
-  33    Apr 4    LiDAR simulation
-  34    Apr 5    Scan processing
-  35    Apr 6    Mapping demo
-  36    Apr 7    PyTorch ROS2 wrapper
-  37    Apr 8    Object detection node
-  38    Apr 9    Semantic segmentation node
-  39    Apr 10   Semantic map creation
-  40    Apr 11   Map query service
-  41    Apr 12   Language-conditioned goals
-  42    Apr 13   Multi-sensor fusion
-  43    Apr 14   Robustness testing
-  44    Apr 15   Performance optimization
-  45    Apr 16   Semantic perception demo
+  27    Apr 2    Occupancy grid basics
+  28    Apr 3    Map update pipeline
+  29    Apr 4    LiDAR simulation
+  30    Apr 5    Scan processing
+  31    Apr 6    Mapping demo
+  32    Apr 7    PyTorch ROS2 wrapper
+  33    Apr 8    Object detection node
+  34    Apr 9    Semantic segmentation node
+  35    Apr 10   Semantic map creation
+  36    Apr 11   Map query service
+  37    Apr 12   Language-conditioned goals
+  38    Apr 13   Multi-sensor fusion
+  39    Apr 14   Robustness testing
+  40    Apr 15   Performance optimization
+  41    Apr 16   Semantic perception demo
 ```
 
 ------------------------------------------------------------------------
@@ -272,27 +268,27 @@ Key topics:
 ```
   Day   Date     Task
   ----- -------- ----------------------------------
-  46    Apr 17   Perception-to-planning interface
-  47    Apr 18   Local planner implementation
-  48    Apr 19   Navigation simulation
-  49    Apr 20   Safety layer
-  50    Apr 21   Behavior logic
-  51    Apr 22   Lifecycle nodes
-  52    Apr 23   Parameter tuning
-  53    Apr 24   Logging and diagnostics
-  54    Apr 25   Testing automation
-  55    Apr 26   Stress testing
-  56    Apr 27   Full system bringup
-  57    Apr 28   Demo recording
-  58    Apr 29   Repository documentation
-  59    Apr 30   Final NeuroNav-ROS2 release
+  42    Apr 17   Perception-to-planning interface
+  43    Apr 18   Local planner implementation
+  44    Apr 19   Navigation simulation
+  45    Apr 20   Safety layer
+  46    Apr 21   Behavior logic
+  47    Apr 22   Lifecycle nodes
+  48    Apr 23   Parameter tuning
+  49    Apr 24   Logging and diagnostics
+  50    Apr 25   Testing automation
+  51    Apr 26   Stress testing
+  52    Apr 27   Full system bringup
+  53    Apr 28   Demo recording
+  54    Apr 29   Repository documentation
+  55    Apr 30   Final NeuroNav-ROS2 release
 ```
 
 ------------------------------------------------------------------------
 
 # Final Outcome
 
-After 59 days the repository will contain:
+After 55 days the repository will contain:
 
 -   A complete ROS2 perception stack.
 -   Vision processing pipelines.
