@@ -50,6 +50,16 @@ rather than a collection of experiments.
 
 # Repository Structure
 
+Where the project should lives (GitHub Desktop):
+
+```
+/home/duskpriest/GitHub/NeuroNav-ROS2/
+```
+
+Keeping ROS projects inside GitHub Desktop folders is common and makes commits easy.
+
+So we will use that directory as the project root.
+
 ```
     NeuroNav-ROS2
     │
