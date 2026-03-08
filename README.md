@@ -87,6 +87,16 @@ So we will use that directory as the project root.
     └── assets/
 ```
 
+Every time we open a new terminal for this project, run:
+
+```
+cd ~/GitHub/NeuroNav-ROS2/ws
+source install/setup.bash
+```
+
+Otherwise ROS won’t see your packages.
+Later we’ll automate this.
+
 ### Folder Explanation
 
 - **journal/**\
