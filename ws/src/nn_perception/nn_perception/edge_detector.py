@@ -14,18 +14,28 @@ class EdgeDetector(Node):
 
         self.bridge = CvBridge()
 
+        self.declare_parameter('threshold1', 100)
+        self.declare_parameter('threshold2', 200)
+
+        self.threshold1 = self.get_parameter('threshold1').value
+        self.threshold2 = self.get_parameter('threshold2').value
+
         self.subscription = self.create_subscription(
             Image,
-            'camera/image_raw',
+            '/camera/image_raw',
             self.image_callback,
-            10)
+            10
+        )
 
         self.publisher = self.create_publisher(
             Image,
-            'camera/edges',
-            10)
+            '/camera/edges',
+            10
+        )
 
-        self.get_logger().info("Edge detector node started")
+        self.get_logger().info(
+            f"Edge detector started (threshold1={self.threshold1}, threshold2={self.threshold2})"
+        )
 
     def image_callback(self, msg):
 
@@ -33,9 +43,9 @@ class EdgeDetector(Node):
 
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-        edges = cv2.Canny(gray, 100, 200)
+        edges = cv2.Canny(gray, self.threshold1, self.threshold2)
 
-        edge_msg = self.bridge.cv2_to_imgmsg(edges)
+        edge_msg = self.bridge.cv2_to_imgmsg(edges, encoding='8UC1')
 
         self.publisher.publish(edge_msg)
 
