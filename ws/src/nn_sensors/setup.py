@@ -8,7 +8,7 @@ setup(
     packages=[package_name],
     data_files=[
         ('share/ament_index/resource_index/packages', ['resource/' + package_name]),
-        ('share/' + package_name, ['package.xml']),
+        ('share/' + package_name, ['package.xml', 'ost.yaml']),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -21,6 +21,7 @@ setup(
         'console_scripts': [
             'camera_publisher = nn_sensors.camera_publisher:main',
             'image_viewer = nn_sensors.image_viewer:main',
+            'distortion_correction = nn_sensors.distortion_correction:main',
         ],
     },
 )
