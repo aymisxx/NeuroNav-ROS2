@@ -30,6 +30,7 @@ Many learning projects follow a **day-wise folder structure**:
     day01/
     day02/
     day03/
+    day04/
 ```
 
 While this is good for tutorials, it is **not how real robotics systems
