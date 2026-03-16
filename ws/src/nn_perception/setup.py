@@ -31,6 +31,7 @@ setup(
         'console_scripts': [
             'edge_detector = nn_perception.edge_detector:main',
             'orb_features = nn_perception.orb_features:main',
+            'depth_processor = nn_perception.depth_processor:main',
         ],
     },
 )
