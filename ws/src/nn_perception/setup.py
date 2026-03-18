@@ -33,6 +33,7 @@ setup(
             'orb_features = nn_perception.orb_features:main',
             'depth_processor = nn_perception.depth_processor:main',
             'rgb_depth_sync = nn_perception.rgb_depth_sync:main',
+            'object_tracker = nn_perception.object_tracker:main',
         ],
     },
 )
