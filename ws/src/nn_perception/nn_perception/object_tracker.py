@@ -9,12 +9,15 @@ from rclpy.node import Node
 from cv_bridge import CvBridge
 from sensor_msgs.msg import Image
 
+from .centroid_tracker import CentroidTracker
+
 
 class ObjectTracker(Node):
     def __init__(self):
         super().__init__('object_tracker')
 
         self.bridge = CvBridge()
+        self.ct = CentroidTracker(max_disappeared=10)
 
         self.subscription = self.create_subscription(
             Image,
@@ -23,7 +26,9 @@ class ObjectTracker(Node):
             10
         )
 
-        self.get_logger().info('Object tracker started. Subscribed to /camera/image_raw')
+        self.get_logger().info(
+            'Object tracker started. Subscribed to /camera/image_raw'
+        )
 
     def image_callback(self, msg):
         try:
@@ -34,43 +39,53 @@ class ObjectTracker(Node):
 
         hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
-        # Green color range
+        # Tighter green range to reduce false positives
         lower_green = np.array([35, 80, 80])
         upper_green = np.array([85, 255, 255])
 
         mask = cv2.inRange(hsv, lower_green, upper_green)
 
+        # Remove salt-and-pepper noise
+        mask = cv2.medianBlur(mask, 5)
+
+        # Morphological cleanup
         kernel = np.ones((5, 5), np.uint8)
-        mask = cv2.erode(mask, kernel, iterations=1)
-        mask = cv2.dilate(mask, kernel, iterations=2)
+        mask = cv2.erode(mask, kernel, iterations=2)
+        mask = cv2.dilate(mask, kernel, iterations=3)
 
-        contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        contours, _ = cv2.findContours(
+            mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
+        )
 
-        if contours:
-            largest_contour = max(contours, key=cv2.contourArea)
-            area = cv2.contourArea(largest_contour)
+        rects = []
 
-            if area > 500:
-                x, y, w, h = cv2.boundingRect(largest_contour)
-                cx = x + w // 2
-                cy = y + h // 2
+        for cnt in contours:
+            area = cv2.contourArea(cnt)
 
-                cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
-                cv2.circle(frame, (cx, cy), 5, (0, 0, 255), -1)
-                cv2.putText(
-                    frame,
-                    f'Green Object ({cx}, {cy})',
-                    (x, y - 10),
-                    cv2.FONT_HERSHEY_SIMPLEX,
-                    0.6,
-                    (0, 255, 0),
-                    2
+            # Ignore tiny noisy blobs
+            if area > 1500:
+                x, y, w, h = cv2.boundingRect(cnt)
+                rects.append((x, y, x + w, y + h))
+
+                cv2.rectangle(
+                    frame, (x, y), (x + w, y + h), (0, 255, 0), 2
                 )
 
-                if area > 2000:
-                    self.get_logger().info(
-                        f'Tracking green object at ({cx}, {cy}), area={area:.1f}'
-                    )
+        objects = self.ct.update(rects)
+
+        for object_id, centroid in objects.items():
+            cx, cy = int(centroid[0]), int(centroid[1])
+
+            cv2.putText(
+                frame,
+                f'ID {object_id}',
+                (cx - 10, cy - 10),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.5,
+                (0, 255, 0),
+                2
+            )
+            cv2.circle(frame, (cx, cy), 5, (0, 0, 255), -1)
 
         cv2.imshow('Object Tracker', frame)
         cv2.imshow('Green Mask', mask)
