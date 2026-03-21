@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+import time
+
 import cv2
 import numpy as np
 
@@ -46,12 +48,31 @@ class KalmanTracker(Node):
         self.kf.errorCovPost = np.eye(4, dtype=np.float32)
 
         self.initialized = False
+        self.last_time = None
 
         self.get_logger().info(
             'Kalman tracker started. Subscribed to /camera/image_raw'
         )
 
     def image_callback(self, msg):
+        current_time = time.time()
+
+        if self.last_time is None:
+            dt = 0.1
+        else:
+            dt = current_time - self.last_time
+
+        self.last_time = current_time
+
+        # Update transition matrix dynamically using measured dt
+        self.kf.transitionMatrix = np.array(
+            [[1, 0, dt, 0],
+             [0, 1, 0, dt],
+             [0, 0, 1, 0],
+             [0, 0, 0, 1]],
+            dtype=np.float32
+        )
+
         try:
             frame = self.bridge.imgmsg_to_cv2(msg, desired_encoding='bgr8')
         except Exception as e:
@@ -85,7 +106,11 @@ class KalmanTracker(Node):
                 cx = int(x + w / 2)
                 cy = int(y + h / 2)
 
-                measured = np.array([[np.float32(cx)], [np.float32(cy)]])
+                measured = np.array(
+                    [[np.float32(cx)], [np.float32(cy)]],
+                    dtype=np.float32
+                )
+
                 cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
                 cv2.circle(frame, (cx, cy), 6, (0, 0, 255), -1)
                 cv2.putText(
