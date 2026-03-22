@@ -23,6 +23,7 @@ setup(
             'image_viewer = nn_sensors.image_viewer:main',
             'distortion_correction = nn_sensors.distortion_correction:main',
             'depth_publisher = nn_sensors.depth_publisher:main',
+            'imu_publisher = nn_sensors.imu_publisher:main',
         ],
     },
 )
