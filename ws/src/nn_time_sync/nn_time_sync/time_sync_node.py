@@ -2,6 +2,7 @@ import rclpy
 from rclpy.node import Node
 
 from sensor_msgs.msg import Imu, Image
+from std_msgs.msg import Float32
 from message_filters import Subscriber, ApproximateTimeSynchronizer
 
 
@@ -14,6 +15,8 @@ class TimeSyncNode(Node):
 
         self.imu_sub = Subscriber(self, Imu, '/imu/data')
         self.image_sub = Subscriber(self, Image, '/camera/image_raw')
+
+        self.sync_quality_pub = self.create_publisher(Float32, '/time_sync/delta', 10)
 
         self.sync = ApproximateTimeSynchronizer(
             [self.imu_sub, self.image_sub],
@@ -35,6 +38,10 @@ class TimeSyncNode(Node):
             quality = 'FAIR'
         else:
             quality = 'POOR'
+
+        dt_msg = Float32()
+        dt_msg.data = float(dt)
+        self.sync_quality_pub.publish(dt_msg)
 
         self.get_logger().info(
             f"[SYNCED] IMU Time: {imu_time:.6f}, "
