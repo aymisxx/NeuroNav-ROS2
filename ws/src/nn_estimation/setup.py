@@ -25,6 +25,7 @@ setup(
     entry_points={
         'console_scripts': [
             'imu_vision_fusion = nn_estimation.imu_vision_fusion_node:main',
+            'visual_odometry = nn_estimation.visual_odometry_node:main',
         ],
     },
 )
