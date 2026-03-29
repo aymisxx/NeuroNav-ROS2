@@ -26,6 +26,7 @@ setup(
         'console_scripts': [
             'imu_vision_fusion = nn_estimation.imu_vision_fusion_node:main',
             'visual_odometry = nn_estimation.visual_odometry_node:main',
+            'pose_chaining = nn_estimation.pose_chaining_node:main',
         ],
     },
 )

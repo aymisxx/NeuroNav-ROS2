@@ -1,6 +1,7 @@
 from launch import LaunchDescription
 from launch_ros.actions import Node
 
+
 def generate_launch_description():
 
     return LaunchDescription([
@@ -21,8 +22,22 @@ def generate_launch_description():
 
         Node(
             package='nn_estimation',
-            executable='imu_vision_fusion',  # ✅ FIXED
+            executable='imu_vision_fusion',
             name='fusion_node',
+            output='screen'
+        ),
+
+        Node(
+            package='nn_estimation',
+            executable='visual_odometry',
+            name='visual_odometry_node',
+            output='screen'
+        ),
+
+        Node(
+            package='nn_estimation',
+            executable='pose_chaining',
+            name='pose_chaining_node',
             output='screen'
         ),
 
