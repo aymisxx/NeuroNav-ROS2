@@ -8,7 +8,7 @@ setup(
     packages=find_packages(exclude=['test']),
     data_files=[
         ('share/ament_index/resource_index/packages',
-            ['resource/' + package_name]),
+         ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
     ],
     install_requires=['setuptools'],
@@ -27,6 +27,7 @@ setup(
             'imu_vision_fusion = nn_estimation.imu_vision_fusion_node:main',
             'visual_odometry = nn_estimation.visual_odometry_node:main',
             'pose_chaining = nn_estimation.pose_chaining_node:main',
+            'drift_analysis = nn_estimation.drift_analysis_node:main',
         ],
     },
 )
