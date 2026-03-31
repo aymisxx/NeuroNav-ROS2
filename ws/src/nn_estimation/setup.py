@@ -27,6 +27,7 @@ setup(
             'imu_vision_fusion = nn_estimation.imu_vision_fusion_node:main',
             'visual_odometry = nn_estimation.visual_odometry_node:main',
             'pose_chaining = nn_estimation.pose_chaining_node:main',
+            'pose_graph = nn_estimation.pose_graph_node:main',
             'drift_analysis = nn_estimation.drift_analysis_node:main',
         ],
     },
