@@ -21,6 +21,13 @@ def generate_launch_description():
         ),
 
         Node(
+            package='nn_sensors',
+            executable='lidar_publisher',
+            name='lidar_publisher',
+            output='screen'
+        ),
+
+        Node(
             package='nn_estimation',
             executable='imu_vision_fusion',
             name='fusion_node',

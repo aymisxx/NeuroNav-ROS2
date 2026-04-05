@@ -24,6 +24,7 @@ setup(
             'distortion_correction = nn_sensors.distortion_correction:main',
             'depth_publisher = nn_sensors.depth_publisher:main',
             'imu_publisher = nn_sensors.imu_publisher:main',
+            'lidar_publisher = nn_sensors.lidar_publisher:main',
         ],
     },
 )
