@@ -6,8 +6,10 @@
   <description>TODO: Package description</description>
   <maintainer email="aymisxx@proton.me">twilightpriest</maintainer>
   <license>TODO: License declaration</license>
+
   <depend>nav_msgs</depend>
   <depend>std_msgs</depend>
+  <depend>sensor_msgs</depend>
 
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>
