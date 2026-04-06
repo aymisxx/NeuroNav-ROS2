@@ -1,54 +1,77 @@
+import math
+
 import rclpy
 from rclpy.node import Node
 from nav_msgs.msg import OccupancyGrid
+from sensor_msgs.msg import LaserScan
 from std_msgs.msg import Header
 
 
 class OccupancyGridNode(Node):
     def __init__(self):
         super().__init__('occupancy_grid_node')
-        self.pub = self.create_publisher(OccupancyGrid, '/map', 10)
-        self.timer = self.create_timer(1.0, self.publish_map)
 
-        self.width = 5
-        self.height = 5
-        self.step = 0
+        self.map_pub = self.create_publisher(OccupancyGrid, '/map', 10)
+        self.scan_sub = self.create_subscription(
+            LaserScan,
+            '/scan_processed',
+            self.scan_callback,
+            10
+        )
 
-    def make_grid(self):
+        self.width = 20
+        self.height = 20
+        self.resolution = 0.5
+        self.origin_x = -(self.width * self.resolution) / 2.0
+        self.origin_y = -(self.height * self.resolution) / 2.0
+
+        self.get_logger().info(
+            'Occupancy grid node started. Subscribed to /scan_processed, publishing /map'
+        )
+
+    def world_to_grid(self, x: float, y: float):
+        gx = int((x - self.origin_x) / self.resolution)
+        gy = int((y - self.origin_y) / self.resolution)
+        return gx, gy
+
+    def scan_callback(self, msg: LaserScan):
         data = [0] * (self.width * self.height)
+        occupied_cells = 0
 
-        obstacles = [
-            (1, 1),
-            (2, 1),
-            (1, 3),
-        ]
-        for x, y in obstacles:
-            data[y * self.width + x] = 100
+        angle = msg.angle_min
+        for r in msg.ranges:
+            if math.isfinite(r) and msg.range_min <= r <= msg.range_max:
+                x = r * math.cos(angle)
+                y = r * math.sin(angle)
 
-        moving_x = self.step % self.width
-        moving_y = 2
-        data[moving_y * self.width + moving_x] = -1
+                gx, gy = self.world_to_grid(x, y)
 
-        return data
+                if 0 <= gx < self.width and 0 <= gy < self.height:
+                    idx = gy * self.width + gx
+                    if data[idx] != 100:
+                        data[idx] = 100
+                        occupied_cells += 1
 
-    def publish_map(self):
-        msg = OccupancyGrid()
-        msg.header = Header()
-        msg.header.stamp = self.get_clock().now().to_msg()
-        msg.header.frame_id = 'map'
+            angle += msg.angle_increment
 
-        msg.info.resolution = 1.0
-        msg.info.width = self.width
-        msg.info.height = self.height
-        msg.info.origin.position.x = 0.0
-        msg.info.origin.position.y = 0.0
-        msg.info.origin.orientation.w = 1.0
+        occ_msg = OccupancyGrid()
+        occ_msg.header = Header()
+        occ_msg.header.stamp = self.get_clock().now().to_msg()
+        occ_msg.header.frame_id = 'map'
 
-        msg.data = self.make_grid()
+        occ_msg.info.resolution = self.resolution
+        occ_msg.info.width = self.width
+        occ_msg.info.height = self.height
+        occ_msg.info.origin.position.x = self.origin_x
+        occ_msg.info.origin.position.y = self.origin_y
+        occ_msg.info.origin.orientation.w = 1.0
 
-        self.pub.publish(msg)
-        self.get_logger().info(f'Published updated occupancy grid step={self.step}')
-        self.step += 1
+        occ_msg.data = data
+
+        self.map_pub.publish(occ_msg)
+        self.get_logger().info(
+            f'Published occupancy grid from scan | occupied_cells={occupied_cells}'
+        )
 
 
 def main(args=None):
