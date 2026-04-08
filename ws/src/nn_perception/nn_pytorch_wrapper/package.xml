@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>nn_pytorch_wrapper</name>
+  <version>0.0.0</version>
+  <description>PyTorch wrapper node for NeuroNav-ROS2.</description>
+  <maintainer email="aymisxx@proton.me">Ayushman Mishra</maintainer>
+  <license>MIT</license>
+
+  <depend>rclpy</depend>
+  <depend>std_msgs</depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>
