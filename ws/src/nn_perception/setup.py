@@ -38,6 +38,8 @@ setup(
             'ekf_tracker = nn_perception.ekf_tracker:main',
             'multi_object_tracker = nn_perception.multi_object_tracker:main',
             'pytorch_wrapper_node = nn_perception.pytorch_wrapper_node:main',
+            'object_detection_node = nn_perception.object_detection_node:main',
+            'static_image_publisher = nn_perception.static_image_publisher:main',
         ],
     },
 )
