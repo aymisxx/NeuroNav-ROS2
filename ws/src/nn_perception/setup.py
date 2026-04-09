@@ -40,6 +40,7 @@ setup(
             'pytorch_wrapper_node = nn_perception.pytorch_wrapper_node:main',
             'object_detection_node = nn_perception.object_detection_node:main',
             'static_image_publisher = nn_perception.static_image_publisher:main',
+            'semantic_segmentation_node = nn_perception.semantic_segmentation_node:main',
         ],
     },
 )
