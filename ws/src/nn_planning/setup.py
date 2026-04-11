@@ -35,6 +35,7 @@ setup(
             'test_automation_node = nn_planning.test_automation_node:main',
             'stress_test_node = nn_planning.stress_test_node:main',
             'demo_recorder_node = nn_planning.demo_recorder_node:main',
+            'final_release_node = nn_planning.final_release_node:main',
         ],
     },
 )
