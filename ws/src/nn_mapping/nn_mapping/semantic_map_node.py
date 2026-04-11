@@ -65,9 +65,7 @@ class SemanticMapNode(Node):
         semantic_map_msg.data = data
 
         self.map_pub.publish(semantic_map_msg)
-        self.get_logger().info(
-            f'Published semantic map | semantic_cells={semantic_cells}'
-        )
+        # Reduced per-frame logging for lighter runtime execution.
 
 
 def main(args=None):
