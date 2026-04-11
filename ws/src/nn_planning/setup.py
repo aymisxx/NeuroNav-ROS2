@@ -25,6 +25,7 @@ setup(
     entry_points={
         'console_scripts': [
             'perception_to_planning_node = nn_planning.perception_to_planning_node:main',
+            'local_planner_node = nn_planning.local_planner_node:main',
         ],
     },
 )
