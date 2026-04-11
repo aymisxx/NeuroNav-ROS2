@@ -1,38 +1,44 @@
 # Day 35: Semantic Map Creation
 
-## Summary
-Implemented a semantic mapping node that converts segmentation masks into a structured Occupancy Grid representation.
+## Objective
+Built a semantic map creation pipeline in ROS2 by converting semantic segmentation masks into an OccupancyGrid representation.
 
 ---
 
-## Pipeline
+## What I implemented
 
-/camera/image_raw → /camera/segmentation_mask → /semantic_map
+- Verified `semantic_map_node.py` in `nn_mapping`.
+- Confirmed ROS2 executable exposure through `setup.py`.
+- Ran `semantic_map_node` successfully.
+- Brought up upstream pipeline:
+  - `static_image_publisher` -> `/camera/image_raw`
+  - `semantic_segmentation_node` -> `/camera/segmentation_mask`
+  - `semantic_map_node` -> `/semantic_map`
+- Verified `/semantic_map` was published as `nav_msgs/msg/OccupancyGrid`.
 
-## Implementation Details
+## Key pipeline
 
-- Created `semantic_map_node` in `nn_mapping`.
-- Subscribes to segmentation mask and resizes it to a grid.
-- Converts semantic pixels into occupancy values (100).
-- Publishes to `/semantic_map`.
+`/camera/image_raw` -> `/camera/segmentation_mask` -> `/semantic_map`
 
-## Validation
+## Important observation
 
-- Verified topic flow across all nodes.
-- Confirmed non-zero semantic pixels (~174k in mask).
-- Verified semantic map occupancy cells (~39 active cells after resizing).
-- Observed stable publishing behavior.
+Initial CLI topic echoes looked misleading because large ROS image/message arrays were truncated. Direct validation and runtime logs confirmed the semantic mask and semantic map were producing nonzero content.
 
-## Issues & Fixes
+## Results
 
-- Encountered NumPy incompatibility (NumPy 2.x vs ROS cv_bridge).
-- Resolved by downgrading to NumPy 1.26.4 in virtual environment.
-- Adjusted HSV thresholds for better segmentation.
+- Semantic map node launched successfully.
+- OccupancyGrid publishing confirmed.
+- Runtime logs showed nonzero semantic cells, e.g. `semantic_cells=1738`.
+- Smol asset created: `assets/day35_semantic_map_creation.png`.
 
-## Result
-End-to-end semantic perception pipeline is functional and producing structured map outputs.
+## Files involved
 
-## Asset
-Terminal log showing semantic_map_node publishing dynamic semantic_cells values (39 ↔ 1738)
+- `ws/src/nn_mapping/nn_mapping/semantic_map_node.py`.
+- `ws/src/nn_mapping/setup.py`.
+- `ws/src/nn_perception/nn_perception/semantic_segmentation_node.py`.
+
+## Notes
+
+This is an image-space semantic map prototype, not yet a geometrically consistent world-frame semantic mapping system. Good enough for Day 35 foundation.
 
 ---
