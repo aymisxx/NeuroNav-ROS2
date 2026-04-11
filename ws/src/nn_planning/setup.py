@@ -34,6 +34,7 @@ setup(
             'diagnostics_logger_node = nn_planning.diagnostics_logger_node:main',
             'test_automation_node = nn_planning.test_automation_node:main',
             'stress_test_node = nn_planning.stress_test_node:main',
+            'demo_recorder_node = nn_planning.demo_recorder_node:main',
         ],
     },
 )
