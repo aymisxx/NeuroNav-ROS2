@@ -26,6 +26,7 @@ setup(
         'console_scripts': [
             'perception_to_planning_node = nn_planning.perception_to_planning_node:main',
             'local_planner_node = nn_planning.local_planner_node:main',
+            'navigation_sim_node = nn_planning.navigation_sim_node:main',
         ],
     },
 )
