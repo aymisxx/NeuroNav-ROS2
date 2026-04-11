@@ -28,6 +28,7 @@ setup(
             'occupancy_grid_node = nn_mapping.occupancy_grid_node:main',
             'scan_processing_node = nn_mapping.scan_processing_node:main',
             'map_query_service = nn_mapping.map_query_service:main',
+            'language_goal_node = nn_mapping.language_goal_node:main',
         ],
     },
 )
