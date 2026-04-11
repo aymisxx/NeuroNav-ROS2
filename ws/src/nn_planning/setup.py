@@ -30,6 +30,7 @@ setup(
             'safety_layer_node = nn_planning.safety_layer_node:main',
             'behavior_logic_node = nn_planning.behavior_logic_node:main',
             'lifecycle_manager_node = nn_planning.lifecycle_manager_node:main',
+            'diagnostics_logger_node = nn_planning.diagnostics_logger_node:main',
         ],
     },
 )
