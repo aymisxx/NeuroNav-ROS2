@@ -28,6 +28,7 @@ setup(
             'local_planner_node = nn_planning.local_planner_node:main',
             'navigation_sim_node = nn_planning.navigation_sim_node:main',
             'safety_layer_node = nn_planning.safety_layer_node:main',
+            'behavior_logic_node = nn_planning.behavior_logic_node:main',
         ],
     },
 )
