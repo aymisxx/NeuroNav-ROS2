@@ -34,8 +34,8 @@ class SemanticSegmentationNode(Node):
 
         hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
-        lower_green = np.array([35, 40, 40])
-        upper_green = np.array([85, 255, 255])
+        lower_green = np.array([25, 20, 20])
+        upper_green = np.array([95, 255, 255])
 
         mask = cv2.inRange(hsv, lower_green, upper_green)
 

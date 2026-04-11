@@ -24,6 +24,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
+            'semantic_map_node = nn_mapping.semantic_map_node:main',
             'occupancy_grid_node = nn_mapping.occupancy_grid_node:main',
             'scan_processing_node = nn_mapping.scan_processing_node:main',
         ],
