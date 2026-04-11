@@ -29,6 +29,7 @@ setup(
             'pose_chaining = nn_estimation.pose_chaining_node:main',
             'pose_graph = nn_estimation.pose_graph_node:main',
             'drift_analysis = nn_estimation.drift_analysis_node:main',
+            'multi_sensor_fusion = nn_estimation.multi_sensor_fusion_node:main',
         ],
     },
 )
